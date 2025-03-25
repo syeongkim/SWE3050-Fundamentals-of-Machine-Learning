@@ -76,7 +76,17 @@ class LinearRegression:
         """
         # ==== EDIT HERE ====
 
-        self.W = None
+        print("x is", x)
+        x_transpose = np.transpose(x)
+        print("x transpose is", x_transpose)
+        x_transpose_x = np.dot(x_transpose, x)
+        print("x transpose dot x is", x_transpose_x)
+        x_transpose_x_inv = np.linalg.inv(x_transpose_x)
+        print("x transpose x inverse is", x_transpose_x_inv)
+        x_transpose_y = np.dot(x_transpose, y)
+        print("x transpose y is", x_transpose_y)
+
+        self.W = np.dot(x_transpose_x_inv, x_transpose_y)
 
         # ===================
 
