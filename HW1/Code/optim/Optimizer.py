@@ -11,7 +11,7 @@ class SGD:
         grad = gradient_clipping(grad, self.threshold)
         # ==== EDIT HERE ====
 
-        updated_weight = None
+        updated_weight = w - lr * grad
         
         # ===================
         return updated_weight
@@ -27,7 +27,8 @@ class Momentum:
         grad = gradient_clipping(grad, self.threshold)
         # ==== EDIT HERE ====
         
-        updated_weight = None
+        self.prev_grad = self.gamma * self.prev_grad + lr * grad
+        updated_weight = w - self.prev_grad
         
         # ===================
         return updated_weight
@@ -42,6 +43,7 @@ def gradient_clipping(grad, threshold):
     L2_norm = norm_squared ** 0.5  # calculate L2_norm 
     # ==== EDIT HERE ====
     
-    
+    if L2_norm > threshold:
+        grad = (grad / L2_norm) * threshold
     # ===================
     return grad
