@@ -45,5 +45,6 @@ def gradient_clipping(grad, threshold):
     
     if L2_norm > threshold:
         grad = (grad / L2_norm) * threshold
+        
     # ===================
     return grad

@@ -112,13 +112,19 @@ def load_reg_data(path, filename, target_at_front, normalize=None, shuffle=False
     num_data = x.shape[0]
     if normalize == 'MinMax':
         # ====== EDIT HERE ======
+
+        x_max = np.max(x, axis = 0)
+        x_min = np.min(x, axis = 0)
+
+        x = (x - x_min) / (x_max - x_min)
         
-        x = None
         # ========================
     elif normalize == 'ZScore':
         # ====== EDIT HERE ======
         
-        x = None
+        x_mean = np.mean(x, axis = 0)
+        x_std = np.std(x, axis = 0)
+        x = (x - x_mean) / x_std
         
         # =======================
     else:
