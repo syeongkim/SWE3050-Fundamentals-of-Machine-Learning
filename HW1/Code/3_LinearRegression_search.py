@@ -19,10 +19,10 @@ _lr = [0.1, 0.01, 0.05]
 # You can EDIT the hyperparameters below.
 _epoch=200
 search_param = 'clipping'
-_batch_size = 64                  
+_batch_size = 64                 
 _lr = 0.01               
 _optim = 'SGD'                        # Write one of SGD, or Momentum
-_gamma = 0.0             
+_gamma = 0.2         
 _clipping = [0.1, 2, 10]              # Write clipping threshold
 _normalize = None                     # Write one of ZScore, MinMax, or None(Default).
 
