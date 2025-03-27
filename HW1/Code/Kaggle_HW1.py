@@ -8,14 +8,14 @@ from utils import RMSE, load_data, optimizer, load_data_with_feature_select, Inf
 np.random.seed(2023)
 
 # You can EDIT the hyperparameters below.
-_epoch=1000
-_batch_size=256
-_lr = 0.01
-_optim = 'SGD'              # Write one of SGD, or Momentum
-_gamma = 0.1
-_normalize = None       # Write one of ZScore, MinMax, or None(Default).
-_threshold = 1.5
-selected_feature = ["holiday","hour"]
+_epoch=2000
+_batch_size=64
+_lr = 0.001
+_optim = 'Momentum'              # Write one of SGD, or Momentum
+_gamma = 0.7
+_normalize = 'ZScore'       # Write one of ZScore, MinMax, or None(Default).
+_threshold = 20
+selected_feature = ["hour", "temp", "clouds_all"]
 
 
 
@@ -45,6 +45,6 @@ print('RMSE on Train Data : %.4f' % error)
 
 # Inference in Test dataset & save inference csv
 inference = model.eval(test_x_data)
-output_file_name = "samlpe_submission.csv"
+output_file_name = "sample_submission.csv"
 Inference2SolutionCsv(inference, output_file_name)
 
