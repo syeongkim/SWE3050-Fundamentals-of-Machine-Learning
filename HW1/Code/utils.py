@@ -16,6 +16,8 @@ def optimizer(optim_name, gamma, threshold=10):
         optim = SGD(threshold)
     elif optim_name == 'Momentum':
         optim = Momentum(gamma, threshold)
+    elif optim_name == 'Adam':
+        optim = Adam(threshold=threshold)
     else:
         raise NotImplementedError
     return optim

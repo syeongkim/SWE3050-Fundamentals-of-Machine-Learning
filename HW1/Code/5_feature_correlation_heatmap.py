@@ -17,11 +17,11 @@ np.random.seed(2023)
 
 _normalize = None           # Write one of ZScore, MinMax, or None(Default).
 
-_selected_feature = ["crim","zn","indus","chas","nox","rm","age","dis","rad","tax","ptratio","black","lstat"]
-_target_feature = ["medv"]
+_selected_feature = ["holiday", "temp", "rain_1h", "snow_1h", "clouds_all", "year", "month", "day", "hour"]
+_target_feature = ["traffic_volume"]
 print(f"num of feature in X: {len(_selected_feature)-1}")
 
-_dataset_name = 'Boston' # Write one of Boston, Wine or Traffic
+_dataset_name = 'Traffic' # Write one of Boston, Wine or Traffic
 
 
 

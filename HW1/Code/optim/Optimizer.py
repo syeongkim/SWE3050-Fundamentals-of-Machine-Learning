@@ -3,6 +3,8 @@ DO NOT EDIT ANY PARTS OTHER THAN "EDIT HERE" !!!
 
 """
 
+import numpy as np
+
 class SGD:
     def __init__(self, threshold):
         self.threshold = threshold # for gradient_clipping
@@ -33,6 +35,30 @@ class Momentum:
         # ===================
         return updated_weight
     
+class Adam:
+    def __init__(self, threshold):
+        self.m = None
+        self.v = None
+        self.beta1 = 0.9
+        self.beta2 = 0.999
+        self.eps = 1e-8
+        self.threshold = threshold
+        self.step = 0
+
+    def update(self, w, grad, lr, **kwargs):
+        self.step += 1
+        if self.m is None:
+            self.m = np.zeros_like(grad)
+            self.v = np.zeros_like(grad)
+
+        self.m = self.beta1 * self.m + (1 - self.beta1) * grad
+        self.v = self.beta2 * self.v + (1 - self.beta2) * (grad ** 2)
+
+        m_hat = self.m / (1 - self.beta1 ** self.step)
+        v_hat = self.v / (1 - self.beta2 ** self.step)
+
+        return w - lr * m_hat / (np.sqrt(v_hat) + self.eps)
+
 
 def gradient_clipping(grad, threshold):
     """
