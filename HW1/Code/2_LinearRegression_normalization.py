@@ -10,7 +10,7 @@ np.random.seed(2023)
 import itertools
 
 # =========== You can EDIT the hyperparameters below. =========== 
-_normalize = None           # Write one of ZScore, MinMax, or None(Default).
+_normalize = 'ZScore'           # Write one of ZScore, MinMax, or None(Default).
 # =============================================================== 
 
 _selected_feature = ["crim","zn","indus","chas","nox","rm","age","dis","rad","tax","ptratio","black","lstat"]

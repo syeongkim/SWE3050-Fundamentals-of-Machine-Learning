@@ -17,7 +17,6 @@ class SGD:
         
         # ===================
         return updated_weight
-    
 
 class Momentum:
     def __init__(self, gamma, threshold):
@@ -35,7 +34,7 @@ class Momentum:
         # ===================
         return updated_weight
     
-class Adam:
+class Adam: # 5번 문제(Mini Kaggle challenge)를 위해 추가함
     def __init__(self, threshold):
         self.m = None
         self.v = None
@@ -59,6 +58,34 @@ class Adam:
 
         return w - lr * m_hat / (np.sqrt(v_hat) + self.eps)
 
+class Adagrad: # 5번 문제(Mini Kaggle challenge)를 위해 추가함
+    def __init__(self, epsilon=1e-8):
+        self.epsilon = epsilon
+        self.G = None  # 누적된 제곱 gradients
+
+    def update(self, W, grad, lr):
+        if self.G is None:
+            self.G = np.zeros_like(W)
+
+        self.G += grad ** 2
+        adjusted_grad = lr * grad / (np.sqrt(self.G) + self.epsilon)
+
+        return W - adjusted_grad
+    
+class RMSProp: # 5번 문제(Mini Kaggle challenge)를 위해 추가함
+    def __init__(self, beta=0.9, epsilon=1e-8):
+        self.beta = beta
+        self.epsilon = epsilon
+        self.Eg = None  # 지수이동평균된 squared gradients
+
+    def update(self, W, grad, lr):
+        if self.Eg is None:
+            self.Eg = np.zeros_like(W)
+
+        self.Eg = self.beta * self.Eg + (1 - self.beta) * (grad ** 2)
+        adjusted_grad = lr * grad / (np.sqrt(self.Eg) + self.epsilon)
+
+        return W - adjusted_grad
 
 def gradient_clipping(grad, threshold):
     """

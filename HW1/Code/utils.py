@@ -18,6 +18,10 @@ def optimizer(optim_name, gamma, threshold=10):
         optim = Momentum(gamma, threshold)
     elif optim_name == 'Adam':
         optim = Adam(threshold=threshold)
+    elif optim_name == 'Adagrad':
+        optim = Adagrad()
+    elif optim_name == 'RMSprop':
+        optim = RMSProp()
     else:
         raise NotImplementedError
     return optim
