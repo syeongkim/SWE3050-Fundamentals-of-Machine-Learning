@@ -16,6 +16,7 @@ def optimizer(optim_name, gamma, threshold=10):
         optim = SGD(threshold)
     elif optim_name == 'Momentum':
         optim = Momentum(gamma, threshold)
+    # 5번 문제(Mini Kaggle challenge)를 위해 추가함
     elif optim_name == 'Adam':
         optim = Adam(threshold=threshold)
     elif optim_name == 'Adagrad':
