@@ -36,7 +36,7 @@ search_param = 'lr'
 
 # HYPERPARAMETERS
 batch_size = 256
-learning_rate = 0.1
+learning_rate = [0.1]
 # =============================================================
 
 train_results = []

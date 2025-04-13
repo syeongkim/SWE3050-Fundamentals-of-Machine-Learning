@@ -66,8 +66,9 @@ def BanknoteData(path, filename):
     '''
     z_score normalization / min_max normalization
     '''
-    x = z_score(df.iloc[:, :-1])
-    # x = min_max(df.iloc[:, :-1])
+    # x = z_score(df.iloc[:, :-1])
+    x = min_max(df.iloc[:, :-1])
+    # x = df.iloc[:, :-1]
 
     # ========================= EDIT HERE =========================
     y = df.values[:, -1].astype(np.int32)
@@ -87,8 +88,9 @@ def IrisData(path, filename):
     '''
     z_score normalization / min_max normalization
     '''
-    x = z_score(df.iloc[:, :-1])
-    # x = min_max(df.iloc[:, :-1])
+    # x = z_score(df.iloc[:, :-1])
+    x = min_max(df.iloc[:, :-1])
+    # x = df.iloc[:, :-1]
 
     # ========================= EDIT HERE =========================
 
