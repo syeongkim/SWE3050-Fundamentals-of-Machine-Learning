@@ -86,6 +86,9 @@ class LogisticRegression:
 
         # ========================= EDIT HERE ========================
 
+        z = np.dot(x, self.W)
+        logits = self._sigmoid(z)
+        loss = -np.mean(y * np.log(logits + eps) + (1 - y) * np.log(1 - logits + eps))
 
         # ============================================================
 
@@ -117,6 +120,7 @@ class LogisticRegression:
 
         # ========================= EDIT HERE ========================
 
+        grad_weight = np.dot(x.T, (logit - y)) / num_data
 
         # ============================================================
 
@@ -138,6 +142,7 @@ class LogisticRegression:
 
         # ========================= EDIT HERE ========================
 
+        sigmoid = 1 / (1 + np.exp(-x))
 
         # ============================================================
 
@@ -161,6 +166,10 @@ class LogisticRegression:
 
         # ========================= EDIT HERE ========================
 
+        z = np.dot(x, self.W)
+        prob = self._sigmoid(z)
+
+        pred = (prob >= threshold).astype(int).flatten()
 
         # ============================================================
 
