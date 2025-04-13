@@ -32,6 +32,7 @@ def z_score (x) :
         Edit here to do z_score normalization.
         '''
         
+        x_col = (x_col - x_col.mean()) / x_col.std()
 
         # ========================= EDIT HERE =========================
         x_[i] = x_col
@@ -48,6 +49,7 @@ def min_max (x) :
         Edit here to do min_max normalization.
         '''
         
+        x_col = (x_col - x_col.min()) / (x_col.max() - x_col.min())
 
         # ========================= EDIT HERE =========================
         x_[i] = x_col
