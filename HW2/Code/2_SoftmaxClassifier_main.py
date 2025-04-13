@@ -32,11 +32,11 @@ batch_size = 256
 learning_rate = [0.1, 0.01, 0.05]
 """
 
-search_param = 'lr'
+search_param = 'bs'
 
 # HYPERPARAMETERS
-batch_size = 256
-learning_rate = [0.1]
+batch_size = [32, 64, 128, 256, 512]
+learning_rate = 0.1
 # =============================================================
 
 train_results = []
