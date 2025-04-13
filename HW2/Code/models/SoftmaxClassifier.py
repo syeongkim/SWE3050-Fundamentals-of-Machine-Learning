@@ -82,7 +82,14 @@ class SoftmaxClassifier:
 
         # ========================= EDIT HERE ========================
 
+        logits = np.dot(x, self.W)
+        prob = self._softmax(logits)
 
+        y_onehot = np.zeros_like(prob)
+        y_onehot[np.arange(num_data), y] = 1
+
+        eps = 1e-10
+        softmax_loss = -np.sum(y_onehot * np.log(prob + eps)) / num_data
         # ============================================================
 
         return prob, softmax_loss
@@ -116,6 +123,12 @@ class SoftmaxClassifier:
 
             # ========================= EDIT HERE ========================
 
+            yy = np.zeros(num_classes)
+            yy[y[j]] = 1
+
+            pp = prob[j, :]
+
+            grad_weight += np.outer(xx, (pp - yy))
 
             # ============================================================
 
@@ -139,6 +152,9 @@ class SoftmaxClassifier:
 
         # ========================= EDIT HERE ========================
 
+        x_shifted = x - np.max(x, axis = 1, keepdims = True)
+        exp_x = np.exp(x_shifted)
+        softmax = exp_x / np.sum(exp_x, axis = 1, keepdims = True)
 
         # ============================================================
 
@@ -162,6 +178,9 @@ class SoftmaxClassifier:
 
         # ========================= EDIT HERE ========================
 
+        logits = np.dot(x, self.W)
+        prob = self._softmax(logits)
+        pred = np.argmax(prob, axis = 1)
 
         # ============================================================
 
