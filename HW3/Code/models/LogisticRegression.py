@@ -22,7 +22,7 @@ class LogisticRegression(nn.Module):
     def l2_regularization(self):
         loss = None
         # ========== STUDENT CODE HERE ==========
-        
+        loss = torch.sum(self.W.weight ** 2)
         # ========== STUDENT CODE HERE ==========
         return loss
     def train(self, X, y, X_val, y_val, learning_rate=0.1, epochs=1000, 
@@ -64,7 +64,15 @@ class LogisticRegression(nn.Module):
             if early_stopping:
                 # ========== STUDENT CODE HERE ==========
                 #use val_loss, best_val_loss, best_weights, no_imporve
-                pass
+                if val_loss.item() < best_val_loss:
+                    best_val_loss = val_loss.item()
+                    best_weights = self.state_dict()
+                    no_improve = 0
+                else:
+                    no_improve += 1
+                
+                if no_improve >= patience:
+                    break
                 # ========== STUDENT CODE HERE ==========
 
 

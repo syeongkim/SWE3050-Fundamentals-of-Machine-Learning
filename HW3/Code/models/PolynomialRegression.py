@@ -15,7 +15,9 @@ class PolynomialRegression:
             x = torch.tensor(x, dtype=torch.float32)
         x = x.view(-1, 1)
         # ========== STUDENT CODE HERE ==========
-        
+        features = [x ** i for i in reversed(range(1, self.degree + 1))]
+        features.append(torch.ones_like(x))
+
         # ========== STUDENT CODE HERE ==========
         return torch.cat(features, dim=1)
 
@@ -24,7 +26,7 @@ class PolynomialRegression:
 
     def l2_reg(self):
         # ========== STUDENT CODE HERE ==========
-        
+        return torch.sum(self.W ** 2)
         # ========== STUDENT CODE HERE ==========
 
     def train(self, x, y, batch_size, epochs, lr, val_x=None, val_y=None, early_stopping=False, patience=5):
@@ -47,7 +49,9 @@ class PolynomialRegression:
                 # ========== STUDENT CODE HERE ==========
 
                 # Forward pass (compute prediction)
+                pred = self.forward(batch_x)
                 # Compute MSE loss
+                loss = torch.mean((pred-batch_y) ** 2)
                 
 
                 if self.reg_method == 'l2':
@@ -57,13 +61,15 @@ class PolynomialRegression:
                 else:
                     reg = torch.tensor(0.0)      
                 # Add regularization term to the loss if reg is used.
+                loss += reg
 
                 # Backward + update
-                # self.optimizer.zero_grad()
-                # loss.backward()
-                # self.optimizer.step()
+                self.optimizer.zero_grad()
+                loss.backward()
+                self.optimizer.step()
 
                 # Accumulate epoch_loss
+                epoch_loss += loss.item()
                 # ========== STUDENT CODE HERE ==========
                 
 
@@ -74,6 +80,15 @@ class PolynomialRegression:
                 val_rmse = self.eval(val_x, val_y, batch_size)
                 # ========== STUDENT CODE HERE ==========
                 #use val_rmse, best_val_rmse, best_weights, no_imporve
+                if val_rmse < best_val_rmse:
+                    best_val_rmse = val_rmse
+                    best_weights = self.W.clone().detach()
+                    no_improve = 0
+                else:
+                    no_improve += 1
+                
+                if no_improve >= patience:
+                    break
 
                 # ========== STUDENT CODE HERE ==========
 

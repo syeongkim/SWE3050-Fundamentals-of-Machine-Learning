@@ -9,11 +9,11 @@ torch.manual_seed(42)
 
 # ======= Set these paths to your dataset =======
 dir_name = 'data_mnist' #fix
-epochs = 1000           #fix   
-learning_rate  = 0.1    #fix
+epochs = 50000           #fix   
+learning_rate  = 5e-2    #fix
 
 
-lambda_reg = 0   # [0 0.1 0.01 0.001]
+lambda_reg = 0.0   # [0 0.1 0.01 0.001]
 augment= False # True or False
 early_stopping=True   # True or False
 patience = 5
