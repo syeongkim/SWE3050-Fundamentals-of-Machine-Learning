@@ -17,7 +17,6 @@ class PolynomialRegression:
         # ========== STUDENT CODE HERE ==========
         features = [x ** i for i in reversed(range(1, self.degree + 1))]
         features.append(torch.ones_like(x))
-
         # ========== STUDENT CODE HERE ==========
         return torch.cat(features, dim=1)
 
@@ -69,7 +68,7 @@ class PolynomialRegression:
                 self.optimizer.step()
 
                 # Accumulate epoch_loss
-                epoch_loss += loss.item()
+                epoch_loss += loss.item() * batch_x.size(0)
                 # ========== STUDENT CODE HERE ==========
                 
 
@@ -82,14 +81,12 @@ class PolynomialRegression:
                 #use val_rmse, best_val_rmse, best_weights, no_imporve
                 if val_rmse < best_val_rmse:
                     best_val_rmse = val_rmse
-                    best_weights = self.W.clone().detach()
+                    best_weights = self.W.detach().clone()
                     no_improve = 0
                 else:
                     no_improve += 1
-                
-                if no_improve >= patience:
-                    break
-
+                    if no_improve >= patience:
+                        break
                 # ========== STUDENT CODE HERE ==========
 
         if early_stopping and best_weights is not None:

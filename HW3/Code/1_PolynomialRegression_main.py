@@ -32,19 +32,19 @@ test_x, test_y = load_csv(TEST_PATH)
 batch_size = 128
 num_epochs = 50000
 learning_rate = 5e-2
-degree = 10
+degree = 100
 lambda_reg = 0.0
 
 # ======= Train model: No regularization, no early stopping =======
-print("\n[Training: No Regularization, No Early Stopping]")
-model_plain = PolynomialRegression(degree=degree)
-model_plain.train(train_x, train_y, batch_size, num_epochs, learning_rate)
+# print("\n[Training: No Regularization, No Early Stopping]")
+# model_plain = PolynomialRegression(degree=degree)
+# model_plain.train(train_x, train_y, batch_size, num_epochs, learning_rate)
 
-# # ======= Train model: With early stopping =======
-# print("\n[Training: Early Stopping]")
-# model_early = PolynomialRegression(degree=degree)
-# model_early.train(train_x, train_y, batch_size, num_epochs, learning_rate,
-#                   val_x=val_x, val_y=val_y, early_stopping=True, patience=1)
+# ======= Train model: With early stopping =======
+print("\n[Training: Early Stopping]")
+model_early = PolynomialRegression(degree=degree)
+model_early.train(train_x, train_y, batch_size, num_epochs, learning_rate,
+                 val_x=val_x, val_y=val_y, early_stopping=True, patience=1)
 
 # # ======= Train model: With regularization =======
 # print("\n[Training: L2 Regularization]")
@@ -53,9 +53,9 @@ model_plain.train(train_x, train_y, batch_size, num_epochs, learning_rate)
 
 # ======= Evaluation =======
 # You need to change model name
-rmse_train = model_plain.eval(train_x, train_y, batch_size)
-rmse_val = model_plain.eval(val_x, val_y, batch_size)
-rmse_test = model_plain.eval(test_x, test_y, batch_size)
+rmse_train = model_early.eval(train_x, train_y, batch_size)
+rmse_val = model_early.eval(val_x, val_y, batch_size)
+rmse_test = model_early.eval(test_x, test_y, batch_size)
 
 # ======= Print results =======
 print("\n[Final RMSE Results]")
